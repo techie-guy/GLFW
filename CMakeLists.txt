@@ -32,6 +32,7 @@ cmake_dependent_option(GLFW_BUILD_COCOA "Build support for Cocoa" ON "APPLE" OFF
 cmake_dependent_option(GLFW_BUILD_X11 "Build support for X11" ON "UNIX;NOT APPLE" OFF)
 cmake_dependent_option(GLFW_BUILD_WAYLAND "Build support for Wayland"
     "${GLFW_USE_WAYLAND}" "UNIX;NOT APPLE" OFF)
+cmake_dependent_option(GLFW_BUILD_ANDROID "Build support for Android" ON "UNIX OR WIN32 OR APPLE" OFF)
 
 cmake_dependent_option(GLFW_USE_HYBRID_HPG "Force use of high-performance GPU on hybrid systems" OFF
                        "WIN32" OFF)
@@ -74,6 +75,9 @@ if (GLFW_BUILD_WAYLAND)
 endif()
 if (GLFW_BUILD_X11)
     message(STATUS "Including X11 support")
+endif()
+if (GLFW_BUILD_ANDROID)
+    message(STATUS "Including Android support")
 endif()
 
 #--------------------------------------------------------------------
