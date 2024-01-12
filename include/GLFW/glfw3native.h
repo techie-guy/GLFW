@@ -123,6 +123,10 @@ extern "C" {
   #include <wayland-client.h>
  #endif
 
+ #if defined(GLFW_EXPOSE_NATIVE_ANDROID)
+  #include <android_native_app_glue.h>
+ #endif
+
  #if defined(GLFW_EXPOSE_NATIVE_WGL)
   /* WGL is declared by windows.h */
  #endif
@@ -624,6 +628,10 @@ GLFWAPI int glfwGetOSMesaDepthBuffer(GLFWwindow* window, int* width, int* height
  *  @ingroup native
  */
 GLFWAPI OSMesaContext glfwGetOSMesaContext(GLFWwindow* window);
+#endif
+
+#if defined(GLFW_EXPOSE_NATIVE_ANDROID)
+GLFWAPI struct android_app* glfwGetAndroidApp(void);
 #endif
 
 #ifdef __cplusplus

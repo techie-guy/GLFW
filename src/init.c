@@ -449,6 +449,7 @@ GLFWAPI int glfwInit(void)
     _glfw.initialized = GLFW_TRUE;
 
     glfwDefaultWindowHints();
+
     return GLFW_TRUE;
 }
 
