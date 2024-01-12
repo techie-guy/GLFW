@@ -63,6 +63,19 @@ if (GLFW_BUILD_X11 OR GLFW_BUILD_WAYLAND)
     target_sources(glfw PRIVATE posix_poll.h posix_poll.c)
 endif()
 
+if (GLFW_BUILD_ANDROID)
+	add_library(native_app_glue STATIC ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+
+	# set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
+	target_include_directories(glfw PRIVATE ${ANDROID_NDK}/sources/android/native_app_glue)
+	# target_link_options(glfw PUBLIC "-u ANativeActivity_onCreate")
+
+	target_compile_definitions(glfw PRIVATE _GLFW_ANDROID)
+	target_sources(glfw PRIVATE android_platform.h android_init.c android_monitor.c android_window.c)
+	target_link_libraries(glfw PRIVATE android native_app_glue EGL GLESv1_CM GLESv2 GLESv3 vulkan log)
+endif()
+
+
 if (GLFW_BUILD_WAYLAND)
     include(CheckIncludeFiles)
     include(CheckFunctionExists)
