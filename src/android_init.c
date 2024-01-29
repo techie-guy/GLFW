@@ -1,4 +1,5 @@
 #include "GLFW/glfw3.h"
+#include "android_native_app_glue.h"
 #include "internal.h"
 #include <android/input.h>
 #include <android/keycodes.h>
@@ -203,7 +204,8 @@ void handle_cmd(struct android_app* app, int32_t cmd)
 
 			int current_width, current_height;
 			_glfwGetWindowSizeAndroid(_glfw.windowListHead, &current_width, &current_height);
-			_glfwSetWindowSizeAndroid(_glfw.windowListHead, current_height, current_width);
+			glfwSetWindowSize(_glfw.windowListHead, current_height, current_width);
+			_glfwInputFramebufferSize(_glfw.windowListHead, current_height, current_width);
 
 			break;
 		}
@@ -342,7 +344,7 @@ int32_t handle_app_input(struct android_app* app, AInputEvent* event)
 }
 
 void android_main(struct android_app* app)
-{
+{	
 	LOGI("Hello There!");
 
 	app->onAppCmd = handle_cmd;

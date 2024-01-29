@@ -9,7 +9,8 @@
 
 typedef VkFlags VkAndroidSurfaceCreateFlagsKHR;
 
-typedef struct VkAndroidSurfaceCreateInfoKHR {
+typedef struct VkAndroidSurfaceCreateInfoKHR
+{
 	VkStructureType                   sType;
 	const void*                       pNext;
 	VkAndroidSurfaceCreateFlagsKHR    flags;
