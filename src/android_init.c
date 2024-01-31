@@ -197,15 +197,12 @@ void handle_cmd(struct android_app* app, int32_t cmd)
 		case APP_CMD_LOST_FOCUS:
 			_glfw.windowListHead->android.is_window_focused = false;
 			break;
-		case APP_CMD_CONFIG_CHANGED:
+		case APP_CMD_WINDOW_RESIZED:
 		{
-			// TODO: Add a better way of detecting Orientation Change
-			//int current_orientation = AConfiguration_getOrientation(app->config);
-
 			int current_width, current_height;
 			_glfwGetWindowSizeAndroid(_glfw.windowListHead, &current_width, &current_height);
-			glfwSetWindowSize(_glfw.windowListHead, current_height, current_width);
-			_glfwInputFramebufferSize(_glfw.windowListHead, current_height, current_width);
+			glfwSetWindowSize(_glfw.windowListHead, current_width, current_height);
+			_glfwInputFramebufferSize(_glfw.windowListHead, current_width, current_height);
 
 			break;
 		}
